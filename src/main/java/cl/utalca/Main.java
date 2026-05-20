@@ -5,6 +5,11 @@ package cl.utalca;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Probando si el repositorio de GitHub se actualiza");
+        InventarioLetras inv = new InventarioLetras("Probando si los métodos funcionan"); //Objeto InventarioLetras
+        System.out.println("size: " + inv.size());
+        System.out.println("isEmpty: " + inv.isEmpty());
+        System.out.println("get('o'): " + inv.get('o'));
     }
 }
+
+//AQUÍ VA EL MENÚ

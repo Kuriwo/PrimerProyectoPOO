@@ -24,4 +24,23 @@ public class InventarioLetras {
             }
         }
     }
+
+    public int get(char letra) {
+        letra = Character.toLowerCase(letra);
+
+        if (letra < 'a' || letra > 'z') {
+            throw new IllegalArgumentException("Letra no valida");
+        } else {
+            int indice = letra - 'a';
+            return inventario[indice]; //Retorna las veces que una letra fue registrada en el inventario
+        }
+    }
+
+    public int size() {
+        return totalCount;
+    }
+
+    public boolean isEmpty() {
+        return nonZeroCount == 0; //Retorna True si nonZeroCount == 0
+    }
 }
