@@ -36,11 +36,39 @@ public class InventarioLetras {
         }
     }
 
+    public void set(char letra, int valor) {
+        letra = Character.toLowerCase(letra);
+
+        if (letra < 'a' || letra > 'z' || valor < 0) { //Se valida que la letra cumpla con los requisitos
+            throw new IllegalArgumentException("Letra no valida");
+        }
+        int indice = letra - 'a';
+        totalCount = totalCount + (valor - inventario[indice]); //La resta nos indica en cuanto debemos aumentar totalCount y se lo sumamos
+        if (inventario[indice] == 0 && valor > 0) { //Verifica si la letra NO estaba registrada y si se agregó en "valor" (es decir, se debe registrar)
+            nonZeroCount++;
+        } else if (inventario[indice] > 0 && valor == 0) { //Verifica si la letra está registrada y si el valor que se le quiere asignar es 0 (es decir, se debe eliminar)
+            nonZeroCount--;
+        }
+        inventario[indice] = valor;
+    }
+
+
     public int size() {
         return totalCount;
     }
 
     public boolean isEmpty() {
         return nonZeroCount == 0; //Retorna True si nonZeroCount == 0
+    }
+
+    public String toString() {
+        String letrasOrdenadas = "";
+
+        for (int i = 0; i < inventario.length; i++) { //Recorre los 26 espacios del Array
+            for (int j = 0; j < inventario[i]; j++) { //Indíca cuantas veces se debe agregar la letra
+                letrasOrdenadas = letrasOrdenadas + (char)(i + 'a'); //Convierte el valor ASCII en letra y la almacena en letrasOrdenadas
+            }
+        }
+        return letrasOrdenadas;
     }
 }
