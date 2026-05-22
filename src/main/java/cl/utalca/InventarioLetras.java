@@ -71,4 +71,47 @@ public class InventarioLetras {
         }
         return letrasOrdenadas;
     }
+
+    public char encriptarCesar(char letra) { //Agregar variable desplazamiento, aún no sé si deba ir
+        letra = Character.toLowerCase(letra);
+        int indice =  letra - 'a'; //Parece inútil por el momento
+
+        if (letra < 'x') { //Excluye letras X, Y, Z
+            return letra = (char) (letra + 3); //Suma 3 al valor ASCII de la letra, significa que avanza 3 letras en el abecedario
+        }else{
+            return letra = (char) ((indice + 3) - indice + 'a' - 2); //Arreglar
+        }
+    }
+
+    public char desencriptarCesar(char letra) {
+        letra = Character.toLowerCase(letra);
+
+        if (letra < 'x') {
+            return letra = (char) (letra - 3); //Resta 3, significa que retrocede 3 letras en el abecedario
+        }else{
+            return letra = (letra);
+        }
+    }
+
+    public String encriptarPalabra (String palabra, int desplazamiento) { //Desplazamiento debería ir en encriptarCesar, o puede que no, aún no lo tengo claro
+       palabra = palabra.toLowerCase();
+       String palabraEncriptada = ""; //Almacena la palabra encriptada
+
+       for (int i = 0; i < palabra.length(); i++) { //Recorre término por término
+           char letra = palabra.charAt(i); //Extrae la letra específica en la posición "i"
+           palabraEncriptada = palabraEncriptada + encriptarCesar(letra); //Aplica el encriptado letra por letra
+       }
+        return palabraEncriptada;
+    }
+
+    public String desencriptarPalabra (String palabra, int desplazamiento) { //Hace lo mismo que encriptarPalabra pero aplicando desencriptadoCesar
+        palabra = palabra.toLowerCase();
+        String palabraDesencriptada = "";
+
+        for (int i = 0; i < palabra.length(); i++) {
+            char letra = palabra.charAt(i);
+            palabraDesencriptada = palabraDesencriptada + desencriptarCesar(letra);
+        }
+        return palabraDesencriptada;
+    }
 }
