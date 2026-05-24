@@ -1,5 +1,5 @@
 package cl.utalca;
-//RECORDATORIO: Ver si nonZeroCount tiene otra función además de isEmpty, porque de ser solo esa, se debería poder usar totalCount para la misma función
+
 public class InventarioLetras {
 
     //Se definen los atributos privados
@@ -44,7 +44,7 @@ public class InventarioLetras {
         }
         int indice = letra - 'a';
         totalCount = totalCount + (valor - inventario[indice]); //La resta nos indica en cuanto debemos aumentar totalCount y se lo sumamos
-        if (inventario[indice] == 0 && valor > 0) { //Verifica si la letra NO estaba registrada y si se agregó en "valor" (es decir, se debe registrar)
+        if (inventario[indice] == 0 && valor > 0) { //Verifica si la letra NO está registrada y si se agregó en "valor" (es decir, se debe registrar)
             nonZeroCount++;
         } else if (inventario[indice] > 0 && valor == 0) { //Verifica si la letra está registrada y si el valor que se le quiere asignar es 0 (es decir, se debe eliminar)
             nonZeroCount--;
@@ -72,34 +72,35 @@ public class InventarioLetras {
         return letrasOrdenadas;
     }
 
-    public char encriptarCesar(char letra) { //Agregar variable desplazamiento, aún no sé si deba ir
+    public char encriptarCesar(char letra, int desplazamiento) {
         letra = Character.toLowerCase(letra);
-        int indice =  letra - 'a'; //Parece inútil por el momento
+        int indice =  letra - 'a';
 
-        if (letra < 'x') { //Excluye letras X, Y, Z
-            return letra = (char) (letra + 3); //Suma 3 al valor ASCII de la letra, significa que avanza 3 letras en el abecedario
+        if (indice + desplazamiento <= 25) { //Excluye las letras que al sumarles el desplazamiento superan la posición 25 (Z en el alfabeto inglés)
+            return letra = (char) (letra + desplazamiento); //Suma desplazamiento al valor ASCII de la letra, significa que avanza n letras en el abecedario
         }else{
-            return letra = (char) ((indice + 3) - indice + 'a' - 2); //Arreglar
+            return letra = (char) ((indice + desplazamiento) - 26 + 'a');
         }
     }
 
-    public char desencriptarCesar(char letra) {
+    public char desencriptarCesar(char letra, int desplazamiento) {
         letra = Character.toLowerCase(letra);
+        int indice = letra - 'a';
 
-        if (letra < 'x') {
-            return letra = (char) (letra - 3); //Resta 3, significa que retrocede 3 letras en el abecedario
+        if (indice - desplazamiento >= 0) { //Incluye las letras que al restarles el desplazamiento son mayores que 0 (indica que no deben "dar vuelta" el alfabeto)
+            return letra = (char) (letra - desplazamiento); //Resta desplazamiento, significa que retrocede 3 letras en el abecedario
         }else{
-            return letra = (letra);
+            return (char)((indice - desplazamiento) + 26 + 'a');
         }
     }
 
-    public String encriptarPalabra (String palabra, int desplazamiento) { //Desplazamiento debería ir en encriptarCesar, o puede que no, aún no lo tengo claro
+    public String encriptarPalabra (String palabra, int desplazamiento) {
        palabra = palabra.toLowerCase();
        String palabraEncriptada = ""; //Almacena la palabra encriptada
 
        for (int i = 0; i < palabra.length(); i++) { //Recorre término por término
            char letra = palabra.charAt(i); //Extrae la letra específica en la posición "i"
-           palabraEncriptada = palabraEncriptada + encriptarCesar(letra); //Aplica el encriptado letra por letra
+           palabraEncriptada = palabraEncriptada + encriptarCesar(letra, desplazamiento); //Aplica el encriptado letra por letra
        }
         return palabraEncriptada;
     }
@@ -110,7 +111,7 @@ public class InventarioLetras {
 
         for (int i = 0; i < palabra.length(); i++) {
             char letra = palabra.charAt(i);
-            palabraDesencriptada = palabraDesencriptada + desencriptarCesar(letra);
+            palabraDesencriptada = palabraDesencriptada + desencriptarCesar(letra, desplazamiento);
         }
         return palabraDesencriptada;
     }

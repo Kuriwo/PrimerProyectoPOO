@@ -19,13 +19,13 @@ public class Main {
         System.out.println("size: " + inv.size());
         System.out.println("toString: " + inv.toString());
 
-        //Probando Encriptar y Desencriptar, Funciona perfecto, exceptuando que no puede encriptar de X en adelante
-        System.out.println("Encriptar Cesar letra B: " + inv.encriptarCesar('b'));
-        System.out.println("Desencriptar Cesar letra X: " + inv.encriptarCesar('X')); //MALO, si es de X en adelante
-        System.out.println("Desencriptar Cesar letra E: " + inv.desencriptarCesar('e'));
+        //Probando Encriptar y Desencriptar CON DESPLAZAMIENTO
+        System.out.println("Encriptar Cesar letra B: " + inv.encriptarCesar('b', 2));
+        System.out.println("Encriptar Cesar letra X: " + inv.encriptarCesar('x', 1));
+        System.out.println("Desencriptar Cesar letra E: " + inv.desencriptarCesar('_', 1));
 
-        System.out.println(inv.encriptarPalabra("Probando encriptar", 3)); //Necesario decidir qué hacer con el parámetro desplazamiento, actualmente es inútil
-        System.out.println(inv.desencriptarPalabra("suredqgr#hqfulswdu", 3));
+        System.out.println(inv.encriptarPalabra("Xilofono", 4));
+        System.out.println(inv.desencriptarPalabra("bmpsjsrs", 4));
 
         //Probando add, amplifies y subtract
         InventarioLetras inv1 = new InventarioLetras("Alan Turing");
