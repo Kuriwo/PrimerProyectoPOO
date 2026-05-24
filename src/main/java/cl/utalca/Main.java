@@ -26,6 +26,16 @@ public class Main {
 
         System.out.println(inv.encriptarPalabra("Probando encriptar", 3)); //Necesario decidir qué hacer con el parámetro desplazamiento, actualmente es inútil
         System.out.println(inv.desencriptarPalabra("suredqgr#hqfulswdu", 3));
+
+        //Probando add, amplifies y subtract
+        InventarioLetras inv1 = new InventarioLetras("Alan Turing");
+        InventarioLetras inv2 = new InventarioLetras("Ada Lovelace");
+        InventarioLetras suma = inv1.add(inv2);
+        InventarioLetras resta = inv1.subtract(inv2);
+        InventarioLetras producto = inv1.amplifies(2);
+        System.out.println(suma);
+        System.out.println(resta);
+        System.out.println(producto);
     }
 }
 

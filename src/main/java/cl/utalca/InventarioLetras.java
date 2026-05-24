@@ -114,4 +114,37 @@ public class InventarioLetras {
         }
         return palabraDesencriptada;
     }
+
+    public InventarioLetras add(InventarioLetras otro) {
+        InventarioLetras suma = new InventarioLetras(""); //Se guarda la suma de inventarios
+
+        for(int i = 0; i < 26; i++) {
+            char letra = (char)(i + 'a');
+            suma.set(letra, this.get(letra) + otro.get(letra)); //Suma letra por letra el inventario "actual" con el otro inventario
+        }
+        return suma;
+    }
+
+    public InventarioLetras subtract(InventarioLetras otro) {
+        InventarioLetras resta = new InventarioLetras(""); //Se guarda la resta de inventarios
+
+        for(int i = 0; i < 26; i++) {
+            char letra = (char)(i + 'a');
+            if (this.get(letra) - otro.get(letra) < 0) { //Si la resta de letras es negativa retorna null
+                return null;
+            }
+            resta.set(letra, this.get(letra) - otro.get(letra)); //Resta letra por letra el inventario "actual" con el otro inventario
+        }
+        return resta;
+    }
+
+    public InventarioLetras amplifies(int n) {
+        InventarioLetras producto = new InventarioLetras(""); //Se guarda el producto de la multiplicación
+
+        for(int i = 0; i < 26; i++) {
+            char letra = (char)(i + 'a');
+            producto.set(letra, this.get(letra) * n); //Multiplica cada letra por n
+        }
+        return producto;
+    }
 }
