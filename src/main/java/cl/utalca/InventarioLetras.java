@@ -1,3 +1,5 @@
+//Proyecto Nro. 1 Inventario Letras - Francisco Ramírez
+
 package cl.utalca;
 
 public class InventarioLetras {
@@ -76,9 +78,9 @@ public class InventarioLetras {
         int indice =  letra - 'a';
 
         if (indice + desplazamiento <= 25) { //Excluye las letras que al sumarles el desplazamiento superan la posición 25 (Z en el alfabeto inglés)
-            return letra = (char) (letra + desplazamiento); //Suma desplazamiento al valor ASCII de la letra, significa que avanza n letras en el abecedario
+            return (char) (letra + desplazamiento); //Suma desplazamiento al valor ASCII de la letra, significa que avanza n letras en el abecedario
         }else{
-            return letra = (char) ((indice + desplazamiento) - 26 + 'a'); //La letra supera la Z, por lo que "da la vuelta" al inicio del alfabeto
+            return (char) ((indice + desplazamiento) - 26 + 'a'); //La letra supera la Z, por lo que "da la vuelta" al inicio del alfabeto
         }
     }
 
@@ -87,7 +89,7 @@ public class InventarioLetras {
         int indice = letra - 'a';
 
         if (indice - desplazamiento >= 0) { //Incluye las letras que al restarles el desplazamiento son mayores que 0 (indica que no deben "dar vuelta" el alfabeto)
-            return letra = (char) (letra - desplazamiento); //Resta desplazamiento, significa que retrocede 3 letras en el abecedario
+            return (char)(letra - desplazamiento); //Resta desplazamiento, significa que retrocede 3 letras en el abecedario
         }else{
             return (char)((indice - desplazamiento) + 26 + 'a'); //La letra debe retroceder más allá de A, por lo que "da la vuelta" al final del alfabeto
         }
@@ -99,7 +101,11 @@ public class InventarioLetras {
 
        for (int i = 0; i < palabra.length(); i++) { //Recorre término por término
            char letra = palabra.charAt(i); //Extrae la letra específica en la posición "i"
-           palabraEncriptada = palabraEncriptada + encriptarCesar(letra, desplazamiento); //Aplica el encriptado letra por letra
+           if (letra >= 'a' && letra <= 'z') { //Verifica si el carácter es una letra válida
+               palabraEncriptada = palabraEncriptada + encriptarCesar(letra, desplazamiento); //Aplica el encriptado letra por letra
+           } else {
+               palabraEncriptada = palabraEncriptada + letra; //Conserva el carácter tal como está
+           }
        }
         return palabraEncriptada;
     }
@@ -110,7 +116,11 @@ public class InventarioLetras {
 
         for (int i = 0; i < palabra.length(); i++) {
             char letra = palabra.charAt(i);
-            palabraDesencriptada = palabraDesencriptada + desencriptarCesar(letra, desplazamiento);
+            if (letra >= 'a' && letra <= 'z') { //Verifica si el carácter es una letra válida
+                palabraDesencriptada = palabraDesencriptada + desencriptarCesar(letra, desplazamiento); //Aplica el encriptado letra por letra
+            } else {
+                palabraDesencriptada = palabraDesencriptada + letra; //Conserva el carácter tal como está
+            }
         }
         return palabraDesencriptada;
     }

@@ -1,3 +1,5 @@
+//Proyecto Nro. 1 Inventario Letras - Francisco Ramírez
+
 package cl.utalca;
 
 import java.util.*;
@@ -79,20 +81,42 @@ public class Main {
                 } else {
                     System.out.print("Ingrese una letra: ");
                     char letra = sc.nextLine().charAt(0);
-                    System.out.println("Conteo de '" + letra + "': " + inv1.get(letra));
+                    System.out.println("Conteo de '" + letra + "'en el inventario 1: " + inv1.get(letra));
+                    if (inv2 == null) {
+                        System.out.println("Inventario 2: Aun no creado.");
+                    } else {
+                        System.out.println("Conteo de '" + letra + "'en el inventario 2: " + inv2.get(letra));
+                    }
                 }
 
             } else if (opcion == 4) {
                 if (inv1 == null) {
-                    System.out.println("Debe crear el inventario 1 primero.");
+                    System.out.println("Debe crear al menos un inventario primero.");
                 } else {
+                    System.out.println("Que inventario desea modificar?");
+                    System.out.println("1) Inventario 1 --- 2) Inventario 2");
+                    int opcion2 = sc.nextInt();
+                    sc.nextLine();
+
+                    InventarioLetras inv = null;
+                    if (opcion2 == 1) {
+                        inv = inv1;
+                    } else if (opcion2 == 2) {
+                        if (inv2 == null) {
+                            System.out.println("El inventario 2 aun no ha sido creado.");
+                        } else {
+                            inv = inv2;
+                        }
+                    }
+                    if (inv != null) {
                     System.out.print("Ingrese una letra: ");
                     char letra = sc.nextLine().charAt(0);
                     System.out.print("Ingrese el nuevo valor: ");
                     int valor = sc.nextInt();
                     sc.nextLine();
-                    inv1.set(letra, valor);
+                    inv.set(letra, valor);
                     System.out.println("Letra modificada correctamente.");
+                    }
                 }
 
             } else if (opcion == 5) {
@@ -135,7 +159,7 @@ public class Main {
                 if (inv1 == null) {
                     System.out.println("Debe crear el inventario 1 primero.");
                 } else {
-                    System.out.print("Ingrese el factor de amplificacion: ");
+                    System.out.print("Ingrese por cuanto desea amplificar: ");
                     int n = sc.nextInt();
                     sc.nextLine();
                     System.out.println("Inventario amplificado: " + inv1.amplifies(n));
@@ -145,7 +169,7 @@ public class Main {
                 System.out.println("Saliendo...");
 
             } else {
-                System.out.println("Opción no válida.");
+                System.out.println("Opcion no valida.");
             }
         }
     }
