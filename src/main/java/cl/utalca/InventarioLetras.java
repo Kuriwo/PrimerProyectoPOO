@@ -30,10 +30,9 @@ public class InventarioLetras {
 
         if (letra < 'a' || letra > 'z') {
             throw new IllegalArgumentException("Letra no valida");
-        } else {
-            int indice = letra - 'a';
-            return inventario[indice]; //Retorna las veces que una letra fue registrada en el inventario
         }
+        int indice = letra - 'a';
+        return inventario[indice]; //Retorna las veces que una letra fue registrada en el inventario
     }
 
     public void set(char letra, int valor) {
@@ -79,7 +78,7 @@ public class InventarioLetras {
         if (indice + desplazamiento <= 25) { //Excluye las letras que al sumarles el desplazamiento superan la posición 25 (Z en el alfabeto inglés)
             return letra = (char) (letra + desplazamiento); //Suma desplazamiento al valor ASCII de la letra, significa que avanza n letras en el abecedario
         }else{
-            return letra = (char) ((indice + desplazamiento) - 26 + 'a');
+            return letra = (char) ((indice + desplazamiento) - 26 + 'a'); //La letra supera la Z, por lo que "da la vuelta" al inicio del alfabeto
         }
     }
 
@@ -90,7 +89,7 @@ public class InventarioLetras {
         if (indice - desplazamiento >= 0) { //Incluye las letras que al restarles el desplazamiento son mayores que 0 (indica que no deben "dar vuelta" el alfabeto)
             return letra = (char) (letra - desplazamiento); //Resta desplazamiento, significa que retrocede 3 letras en el abecedario
         }else{
-            return (char)((indice - desplazamiento) + 26 + 'a');
+            return (char)((indice - desplazamiento) + 26 + 'a'); //La letra debe retroceder más allá de A, por lo que "da la vuelta" al final del alfabeto
         }
     }
 
